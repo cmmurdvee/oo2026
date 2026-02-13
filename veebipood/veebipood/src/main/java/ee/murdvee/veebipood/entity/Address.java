@@ -1,4 +1,4 @@
-package ee.murdvee.film.entity;
+package ee.murdvee.veebipood.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,19 +9,18 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDate;
-
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Movie {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String name;
-    private String description;
-    private boolean released;
-    private Integer year;
+    private String street;
+    private String number;
+    private String city;
+    private String country;
+    private String zipcode;
 }
