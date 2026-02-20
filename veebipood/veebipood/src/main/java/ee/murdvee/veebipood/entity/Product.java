@@ -1,9 +1,6 @@
 package ee.murdvee.veebipood.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +21,14 @@ public class Product {
     private double price;
     private boolean active;
     private int stock;
+
+    //@ManyToMany -> private List<Ingredients> Ingredients
+    //@OneToMany -> private List<Ingredients> Ingredients
+    //@ManyToOne -> tooted jagavad seda kategooriad
+    //OneToOne -> tooted ei jaga seda kategooriad
+
+    @ManyToOne
+    private Category category; //automaatselt voorvotmega (@Id v2ljaga) siia tabelisse
     //  Panen andmebaasi, aga ei määra väärtust:
     //  double -> 0
     //  boolean -> false
