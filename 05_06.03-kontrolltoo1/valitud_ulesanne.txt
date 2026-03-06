@@ -1,0 +1,7 @@
+Kiirused
+
+* Tee uus Spring rakendus. Lisa entity (vabalt valitud nimega), mis hoiab enda sees nii automaatselt genereeritud ID’d (Long) kui ka arvu (int). Tee application.properties sisse andmebaasiühendus. Tee entity nimele vastav Repository ja Controller. Repository seo Controlleriga @Autowired abil. Tee üks API otspunkt arvude lisamiseks andmebaasi ning teine API otspunkt kõikide arvude vaatamiseks. Kontrolli töötamist Postmaniga. Lisa numbri sisestuse juures vähemalt 2 kontrolli, mis väljastavad veateate.
+
+* Loo API otspunkt, mis leiab kõigi arvude keskmise. Tee API otspunkt, mis arvestab, et kõik numbrid on andmebaasis km/h, aga väljastab hoopis miili/tunnis.
+
+* Salvesta kõik miili teisendused andmebaasi - uude tabelisse (pead uue Entity ja Repository tegema). Töötamine: sul on esialgses tabelis 8 numbrit. Kui nüüd teisendad kolm korda järjest miilidesse, tekib 3x8 kirjet juurde. Viimane ülesanne: tee võimalus API otspunkti kaudu igat andmebaasi kirjet täpselt 1 võrra suurendada.
