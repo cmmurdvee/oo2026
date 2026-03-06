@@ -2,7 +2,9 @@ package ee.murdvee.kontrolltoo.service;
 
 import ee.murdvee.kontrolltoo.dto.KiirusSaveDto;
 import ee.murdvee.kontrolltoo.entity.Kiirus;
+import ee.murdvee.kontrolltoo.entity.MiilTeisendus;
 import ee.murdvee.kontrolltoo.repository.KiirusRepository;
+import ee.murdvee.kontrolltoo.repository.MiilTeisendusRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import java.util.List;
 public class KiirusService {
 
     private KiirusRepository kiirusRepository;
+    private MiilTeisendusRepository miilTeisendusRepository;
 
     public Kiirus save(KiirusSaveDto dto) {
         // arv peab olema positvne
@@ -33,7 +36,7 @@ public class KiirusService {
         return kiirusRepository.findAll();
     }
 
-    //  Arvutab koigi kiiruste keskmise
+    // Arvutab koigi kiiruste keskmise
     public double getKeskmine() {
         List<Kiirus> kiirused = kiirusRepository.findAll();
         if (kiirused.isEmpty()) {
@@ -45,10 +48,22 @@ public class KiirusService {
                 .orElseThrow();
     }
 
-    // km/h teinsendamine mph
-    public List<Double> getMiilidesse() {
-        return kiirusRepository.findAll().stream()
-                .map(k -> k.getArv() * 0.621371)
+    // km/h teinsemdanine mph, tulemuste salvestamine miil_teisendus tabelisse ja nende agastastamine
+    public List<MiilTeisendus> getMiilidesse() {
+        List<MiilTeisendus> teisendused = kiirusRepository.findAll().stream()
+                .map(k -> {
+                    MiilTeisendus t = new MiilTeisendus();
+                    t.setMph(k.getArv() * 0.621371);
+                    return t;
+                })
                 .toList();
+        return miilTeisendusRepository.saveAll(teisendused);
+    }
+
+    // iga kiiruse suurendamine 1 arvu vorra
+    public List<Kiirus> suurendaKoiki() {
+        List<Kiirus> kiirused = kiirusRepository.findAll();
+        kiirused.forEach(k -> k.setArv(k.getArv() + 1));
+        return kiirusRepository.saveAll(kiirused);
     }
 }
