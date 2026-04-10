@@ -20,6 +20,9 @@ public class CategoryController {
         return categoryRepository.findAll();
     }
 
+    // TODO: categoies/admin --> kuvatakse koik kategooriad
+    // categories --> kuvatakse vaid kategooriad, kellel on moni toode
+
     @DeleteMapping("categories/{id}")
     public List<Category> deleteCategory(@PathVariable Long id){
         categoryRepository.deleteById(id); // kustutan
